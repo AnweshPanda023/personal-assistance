@@ -1,5 +1,4 @@
-import { Task } from "../models/tasks";
-
+import { Task } from "../models/TasksModel";
 
 export const createTask = (title: string): Task => ({
   id: Date.now().toString(),
