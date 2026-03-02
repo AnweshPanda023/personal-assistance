@@ -3,19 +3,26 @@ import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function DashboardScreen() {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
 
   return (
-    <View style={{ flex: 1 }}>
+    <View
+      style={[
+        { flex: 1, backgroundColor: "#f4f4f4" },
+        { paddingTop: insets.top + 10 },
+      ]}
+    >
       {/* Custom Header */}
       <View style={styles.header}>
         <Text style={styles.title}>Hello User X</Text>
 
         <TouchableOpacity
           style={styles.profileButton}
-          onPress={() => router.push("/profile/profile")}
+          onPress={() => router.push("/profile")}
         >
           <Ionicons name="person-circle" size={32} color="#4CAF50" />
         </TouchableOpacity>
@@ -31,7 +38,6 @@ export default function DashboardScreen() {
 
 const styles = StyleSheet.create({
   header: {
-    marginTop: 30,
     height: 60,
     marginLeft: 10,
     marginRight: 10,

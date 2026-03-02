@@ -1,13 +1,13 @@
-import { Task } from "../models/Tasks";
+import { Task } from "../models/TasksModel";
 
 // services/TaskService.js
 let tasks: Task[] = [];
 
 export const TaskService = {
-  getTasks: () => tasks,
+  getTasks: () => [...tasks],
   addTask: (title: string) => {
     const newTask: Task = {
-      id: Date.now().toString(),
+      id: Date.now().toString() + Math.random().toString(36).substring(2),
       title,
       completed: false,
     };

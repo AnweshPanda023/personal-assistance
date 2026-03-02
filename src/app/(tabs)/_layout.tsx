@@ -12,7 +12,7 @@ export default function TabLayout() {
         tabBarShowLabel: false,
         tabBarStyle: [
           styles.tabBar,
-          { paddingBottom: insets.bottom + 10, marginLeft: insets.left + 10 }, // safe area + extra padding
+          { paddingBottom: insets.bottom + 10,backgroundColor: "#f4f4f4", marginLeft: insets.left + 10 }, // safe area + extra padding
         ],
         tabBarIcon: ({ focused }) => {
           let iconName: any;
@@ -51,28 +51,29 @@ export default function TabLayout() {
       <Tabs.Screen name="calendar" options={{ headerShown: false }} />
       <Tabs.Screen name="ai" options={{ headerShown: false }} />
       <Tabs.Screen name="analytics" options={{ headerShown: false }} />
-      <Tabs.Screen
-        name="profile/profile"
-        options={{
-          href: null, // ✅ Hides from tab bar completely
-          headerShown: false,
-        }}
-      />
     </Tabs>
   );
 }
 const styles = StyleSheet.create({
   tabBar: {
     position: "absolute",
-    bottom: 10, // distance from bottom
+    bottom: 10,
     height: 70,
-    borderRadius: 25, // fully rounded corners
+    borderRadius: 25,
     backgroundColor: "#fff",
     flexDirection: "row",
-    justifyContent: "space-around", // icons evenly spaced
+    justifyContent: "space-around",
     alignItems: "center",
-    elevation: 5,
     alignSelf: "center",
     marginRight: 10,
+
+    // Android
+    elevation: 8,
+
+    // iOS + Web
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 6,
   },
 });

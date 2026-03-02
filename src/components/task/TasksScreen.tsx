@@ -1,6 +1,6 @@
 // screens/TodoScreen.tsx
 import { useTasks } from "@/src/hooks/task";
-import { Task } from "@/src/models/Tasks";
+import { Task } from "@/src/models/TasksModel";
 import React, { useState } from "react";
 import {
   FlatList,
@@ -25,7 +25,7 @@ export default function TasksScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>My To-Do List</Text>
+      <Text style={styles.title}>Task Lists</Text>
 
       <View style={styles.inputContainer}>
         <TextInput
@@ -52,7 +52,7 @@ export default function TasksScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 20, backgroundColor: "#fff" },
-  title: { fontSize: 24, fontWeight: "bold", marginBottom: 20 },
+  title: { marginTop: 15, fontSize: 24, fontWeight: "bold", marginBottom: 20 },
   inputContainer: { flexDirection: "row", marginBottom: 20 },
   input: {
     flex: 1,

@@ -1,6 +1,6 @@
-import { StyleSheet ,Text, TouchableOpacity, View } from "react-native";
-import React from "react" 
-import { Task } from "@/src/models/Tasks";
+import { Task } from "@/src/models/TasksModel";
+import React from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 interface TaskListProps {
   task: Task;
