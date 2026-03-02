@@ -1,11 +1,2 @@
-import TabNavigator from "@/src/navigation/TabNavigator";
-import { NavigationContainer } from "@react-navigation/native";
-import React from "react";
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <TabNavigator />
-    </NavigationContainer>
-  );
-}
+import DashboardScreen from "../src/components/dashboard/DashboardScreen";
+export default DashboardScreen;

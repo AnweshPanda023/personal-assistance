@@ -1,15 +1,23 @@
-import { Task } from "../models/TasksModel";
+import { Task } from "../models/Tasks";
 
-export const createTask = (title: string): Task => ({
-  id: Date.now().toString(),
-  title,
-  completed: false,
-});
+// services/TaskService.js
+let tasks: Task[] = [];
 
-export const toggleTaskById = (tasks: Task[], id: string): Task[] =>
-  tasks.map((task) =>
-    task.id === id ? { ...task, completed: !task.completed } : task,
-  );
-
-export const deleteTaskById = (tasks: Task[], id: string): Task[] =>
-  tasks.filter((task) => task.id !== id);
+export const TaskService = {
+  getTasks: () => tasks,
+  addTask: (title: string) => {
+    const newTask: Task = {
+      id: Date.now().toString(),
+      title,
+      completed: false,
+    };
+    tasks.push(newTask);
+    return newTask;
+  },
+  removeTask: (id: string) => {
+    tasks = tasks.filter((task) => task.id !== id);
+  },
+  resetTasks: () => {
+    tasks = [];
+  },
+};
