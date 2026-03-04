@@ -48,6 +48,7 @@ export default function LoginScreen() {
         style={styles.input}
         value={email}
         onChangeText={setEmail}
+        placeholderTextColor="#888"
         autoCapitalize="none"
       />
 
@@ -56,6 +57,7 @@ export default function LoginScreen() {
         style={styles.input}
         value={password}
         onChangeText={setPassword}
+        placeholderTextColor="#888"
         secureTextEntry
       />
 

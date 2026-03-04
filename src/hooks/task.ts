@@ -1,24 +1,18 @@
-// hooks/useTasks.js
 import { useEffect, useState } from "react";
-import { Task } from "../models/TasksModel";
 import { TaskService } from "../services/taskService";
 
 export const useTasks = () => {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    setTasks(TaskService.getTasks());
+    const unsubscribe = TaskService.subscribeTasks(setTasks);
+    return unsubscribe;
   }, []);
 
-  const addTask = (taskName: string) => {
-    const newTask = TaskService.addTask(taskName);
-    setTasks([...tasks, newTask]);
+  return {
+    tasks,
+    addTask: TaskService.addTask,
+    removeTask: TaskService.removeTask,
+    toggleTask: TaskService.toggleTask,
   };
-
-  const removeTask = (id: string) => {
-    TaskService.removeTask(id);
-    setTasks(tasks.filter((task) => task.id !== id));
-  };
-
-  return { tasks, addTask, removeTask };
 };

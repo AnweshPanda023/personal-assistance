@@ -71,6 +71,7 @@ export default function SignupScreen() {
         style={styles.input}
         value={username}
         onChangeText={setUsername}
+        placeholderTextColor="#888"
       />
 
       <TextInput
@@ -78,12 +79,14 @@ export default function SignupScreen() {
         style={styles.input}
         value={displayName}
         onChangeText={setDisplayName}
+        placeholderTextColor="#888"
       />
 
       <TextInput
         placeholder="Email"
         style={styles.input}
         value={email}
+        placeholderTextColor="#888"
         onChangeText={setEmail}
         autoCapitalize="none"
       />
@@ -93,6 +96,7 @@ export default function SignupScreen() {
         style={styles.input}
         value={password}
         onChangeText={setPassword}
+        placeholderTextColor="#888"
         secureTextEntry
       />
 

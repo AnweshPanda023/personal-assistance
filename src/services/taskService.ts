@@ -1,23 +1,46 @@
-import { Task } from "../models/TasksModel";
+import { auth, db } from "@/src/firebaseConfig";
+import {
+  collection,
+  addDoc,
+  deleteDoc,
+  doc,
+  updateDoc,
+  onSnapshot,
+} from "firebase/firestore";
 
-// services/TaskService.js
-let tasks: Task[] = [];
+const getTaskCollection = () => {
+  const user = auth.currentUser;
+  if (!user) throw new Error("User not logged in");
+
+  return collection(db, "users", user.uid, "tasks");
+};
 
 export const TaskService = {
-  getTasks: () => [...tasks],
-  addTask: (title: string) => {
-    const newTask: Task = {
-      id: Date.now().toString() + Math.random().toString(36).substring(2),
+  subscribeTasks: (callback: any) => {
+    return onSnapshot(getTaskCollection(), (snapshot) => {
+      const tasks = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      callback(tasks);
+    });
+  },
+
+  addTask: async (title: string) => {
+    await addDoc(getTaskCollection(), {
       title,
       completed: false,
-    };
-    tasks.push(newTask);
-    return newTask;
+      createdAt: new Date(),
+    });
   },
-  removeTask: (id: string) => {
-    tasks = tasks.filter((task) => task.id !== id);
+
+  removeTask: async (id: string) => {
+    await deleteDoc(doc(getTaskCollection(), id));
   },
-  resetTasks: () => {
-    tasks = [];
+
+  toggleTask: async (id: string, completed: boolean) => {
+    await updateDoc(doc(getTaskCollection(), id), {
+      completed: !completed,
+    });
   },
 };

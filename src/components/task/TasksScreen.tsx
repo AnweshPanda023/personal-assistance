@@ -14,8 +14,7 @@ import { TaskList } from "./TaskList";
 
 export default function TasksScreen() {
   const [taskInput, setTaskInput] = useState<string>("");
-  const { tasks, addTask, removeTask } = useTasks();
-
+  const { tasks, addTask, removeTask, toggleTask } = useTasks();
   const handleAdd = () => {
     if (taskInput.trim()) {
       addTask(taskInput);
@@ -43,7 +42,9 @@ export default function TasksScreen() {
         data={tasks}
         keyExtractor={(item: Task) => item.id}
         renderItem={({ item }: { item: Task }) => (
-          <TaskList task={item} onRemove={removeTask} />
+          <View style={styles.taskContainer}>
+            <TaskList task={item} onRemove={removeTask} onToggle={toggleTask} />
+          </View>
         )}
       />
     </View>
@@ -61,6 +62,12 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     marginRight: 10,
+  },
+  taskContainer: {
+    elevation: 3,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
   },
   addButton: {
     backgroundColor: "#007bff",
