@@ -18,7 +18,7 @@ export default function ProfileScreen() {
 
       // 🔥 If not logged in → go to login
       if (!user) {
-        router.replace("/login"); // change path if needed
+        router.replace("/(auth)/login"); // Correct route path - no leading slash
 
         return;
       }
@@ -42,7 +42,7 @@ export default function ProfileScreen() {
 
   const handleLogout = async () => {
     await signOut(auth);
-    router.replace("/(auth)/login"); // change path if needed
+    router.replace("/(auth)/login"); // Correct route path - no leading slash
   };
 
   const MenuButton = ({

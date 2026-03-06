@@ -3,31 +3,43 @@ import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-interface TaskListProps {
+interface TaskListConditionalProps {
   task: Task;
+  showDueDate: boolean; // true = show due date, false = show due time
   onRemove: (id: string) => void;
   onToggle: (id: string, completed: boolean) => void;
   onEdit: (id: string, title: string) => void;
 }
 
-export const TaskList = ({
+export const TaskListConditional = ({
   task,
+  showDueDate,
   onRemove,
   onToggle,
   onEdit,
-}: TaskListProps) => {
-  // Format date for display
+}: TaskListConditionalProps) => {
+  // Format date for display (MM/DD/YYYY)
   const formatDateForDisplay = (dateStr: string) => {
     if (!dateStr) return "";
     const [year, month, day] = dateStr.split("-");
     return `${month}/${day}/${year}`;
   };
 
+  // Format time display helper
+  const formatTimeDisplay = (time: string): string => {
+    if (!time) return "";
+    const [hours, minutes] = time.split(":");
+    const hour = parseInt(hours);
+    const period = hour >= 12 ? "PM" : "AM";
+    const displayHour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
+    return `${String(displayHour).padStart(2, "0")}:${minutes} ${period}`;
+  };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.leftSection}
-        onPress={() => onToggle(task.id, task.completed)}
+        onPress={() => onToggle(task.id, task.completed || false)}
       >
         <Ionicons
           name={task.completed ? "checkbox" : "square-outline"}
@@ -46,11 +58,23 @@ export const TaskList = ({
           >
             {task.title}
           </Text>
-          {task.dueDate && (
-            <Text style={styles.dateText}>
-              Due: {formatDateForDisplay(task.dueDate)}
-            </Text>
-          )}
+          {/* Conditional display based on showDueDate flag */}
+          {showDueDate
+            ? // Show due date when "All Tasks" is selected
+              (task as any).dueDate && (
+                <Text style={styles.dateText}>
+                  Due: {formatDateForDisplay((task as any).dueDate)}
+                </Text>
+              )
+            : // Show due time when a specific date is selected
+              (task as any).dueTime && (
+                <View style={styles.timeTagContainer}>
+                  <Ionicons name="time-outline" size={14} color="#5f6368" />
+                  <Text style={styles.timeText}>
+                    {formatTimeDisplay((task as any).dueTime)}
+                  </Text>
+                </View>
+              )}
         </View>
       </TouchableOpacity>
 
@@ -100,6 +124,18 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "#999",
     marginTop: 4,
+  },
+
+  timeTagContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    marginTop: 6,
+  },
+
+  timeText: {
+    fontSize: 12,
+    color: "#5f6368",
   },
 
   actions: {

@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 export default function AIScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>🏠 AI</Text>
+      <Text style={styles.text}>🏠 AI Tab(Upcoming)</Text>
     </View>
   );
 }

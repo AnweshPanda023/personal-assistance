@@ -12,7 +12,7 @@ export default function TabLayout() {
         tabBarShowLabel: false,
         tabBarStyle: [
           styles.tabBar,
-          { paddingBottom: insets.bottom + 10,backgroundColor: "#f4f4f4" }, // safe area + extra padding
+          { paddingBottom: insets.bottom + 10, backgroundColor: "#f4f4f4" }, // safe area + extra padding
         ],
         tabBarIcon: ({ focused }) => {
           let iconName: any;

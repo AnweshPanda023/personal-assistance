@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 export default function AnalyticsScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>🏠 Analytics</Text>
+      <Text style={styles.text}>🏠 Analytics Tab(Upcoming)</Text>
     </View>
   );
 }
