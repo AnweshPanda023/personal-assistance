@@ -13,10 +13,10 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { RepetitionModal } from "./RepetitionModal";
 import { TaskListConditional } from "./TaskListConditional";
 import { TimePicker } from "./TimePicker";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function TasksScreenWithRepetition() {
   const [taskInput, setTaskInput] = useState<string>("");
@@ -165,7 +165,7 @@ export default function TasksScreenWithRepetition() {
   };
 
   return (
-    <View style={[styles.container, { marginBottom: insets.bottom +45}]}>
+    <View style={[styles.container, { marginBottom: insets.bottom + 45 }]}>
       <View style={styles.header}>
         <Text style={styles.title}>Tasks List</Text>
 
@@ -334,8 +334,8 @@ export default function TasksScreenWithRepetition() {
 
       {selectedDate && (
         <Text style={styles.tasksLabel}>
-          Task for : {formatDateWithMonth(selectedDate)} ({filteredTasks.length}
-          )
+          Task for : {formatDateWithMonth(selectedDate)} ( Count :
+          {filteredTasks.length ? filteredTasks.length : " " + 0} )
         </Text>
       )}
       {!selectedDate && <Text style={styles.tasksLabel}>All Tasks</Text>}
@@ -526,7 +526,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   dayButton: {
-    width: "14%",
+    width: "12%",
     height: 50,
     aspectRatio: 1,
     justifyContent: "center",

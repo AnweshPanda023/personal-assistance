@@ -44,7 +44,6 @@ export const RepetitionModal = ({
   const startDate = selectedDate || new Date();
   const insets = useSafeAreaInsets();
 
-
   const commonPatterns = [
     {
       name: "Fibonacci",
@@ -146,9 +145,16 @@ export const RepetitionModal = ({
     setShowPreview(true);
   };
   return (
-    <Modal visible={visible} transparent animationType="slide">
+    <Modal
+      style={{ marginBottom: insets.bottom }}
+      visible={visible}
+      transparent
+      animationType="slide"
+    >
       <View style={styles.overlay}>
-        <View style={styles.modalContent}>
+        <View
+          style={[styles.modalContent, { paddingBottom: insets.bottom + 10 }]}
+        >
           <View style={styles.header}>
             <Text style={styles.title}>Add Repetition Task</Text>
             <TouchableOpacity onPress={handleClosePress}>
