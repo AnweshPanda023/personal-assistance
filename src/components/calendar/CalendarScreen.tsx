@@ -155,7 +155,12 @@ export default function GoogleCalendarWithTasks() {
   };
 
   return (
-    <View style={[styles.container, { paddingTop: insets.top }]}>
+    <View
+      style={[
+        styles.container,
+        { marginTop: insets.top, marginBottom: insets.bottom + 60 },
+      ]}
+    >
       {/* Header with Month Navigation */}
       <View style={styles.header}>
         <TouchableOpacity onPress={goToPreviousMonth} style={styles.navButton}>
@@ -461,7 +466,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#ffffff",
-    marginBottom: 70,
   },
 
   // Header

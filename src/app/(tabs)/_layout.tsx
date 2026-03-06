@@ -12,10 +12,14 @@ export default function TabLayout() {
         tabBarShowLabel: false,
         tabBarStyle: [
           styles.tabBar,
-          { paddingBottom: insets.bottom + 10, backgroundColor: "#f4f4f4" }, // safe area + extra padding
+          {
+            paddingBottom: insets.bottom,
+            height: 60 + insets.bottom,
+          },
         ],
         tabBarIcon: ({ focused }) => {
           let iconName: any;
+
           switch (route.name) {
             case "index":
               iconName = focused ? "home" : "home-outline";
@@ -33,13 +37,13 @@ export default function TabLayout() {
               iconName = focused ? "bar-chart" : "bar-chart-outline";
               break;
           }
+
           return (
-            <View style={[{ alignItems: "center", justifyContent: "center" }]}>
+            <View style={styles.iconContainer}>
               <Ionicons
                 name={iconName}
-                size={26} // slightly larger for smaller phones
-                color={focused ? "#4CAF50" : "gray"}
-                bottom={10}
+                size={26}
+                color={focused ? "black" : "#777"}
               />
             </View>
           );
@@ -54,25 +58,23 @@ export default function TabLayout() {
     </Tabs>
   );
 }
+
 const styles = StyleSheet.create({
   tabBar: {
     position: "absolute",
-    height: 70,
-    // borderRadius: 25,
-    backgroundColor: "#fff",
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    alignSelf: "center",
-    // marginRight: 10,
-
-    // Android
+    backgroundColor: "#f4f4f4",
+    borderTopWidth: 0,
     elevation: 8,
+    paddingTop: 8,
 
-    // iOS + Web
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 6,
+    shadowOffset: { width: 0, height: -2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+  },
+
+  iconContainer: {
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
