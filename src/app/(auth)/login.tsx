@@ -31,7 +31,7 @@ export default function LoginScreen() {
 
       await signInWithEmailAndPassword(auth, email, password);
 
-      router.push("/(tabs)"); // Go to dashboard
+      // router.push("/(tabs)"); // Go to dashboard
     } catch (err: any) {
       setError("Invalid email or password");
     } finally {

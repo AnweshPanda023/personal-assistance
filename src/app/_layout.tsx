@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { auth } from "@/src/firebaseConfig";
 import { Stack } from "expo-router";
 import { onAuthStateChanged, User } from "firebase/auth";
-import { auth } from "@/src/firebaseConfig";
+import { useEffect, useState } from "react";
 
 export default function RootLayout() {
   const [user, setUser] = useState<User | null>(null);
@@ -20,7 +20,11 @@ export default function RootLayout() {
 
   return (
     <Stack screenOptions={{ headerShown: false }}>
-      {!user ? <Stack.Screen name="(auth)" /> : <Stack.Screen name="(tabs)" />}
+      {user ? (
+        <Stack.Screen name="(tabs)" />
+      ) : (
+        <Stack.Screen name="(auth)/login" />
+      )}
     </Stack>
   );
 }
