@@ -4,6 +4,9 @@
 node_modules/
 node_modules copy/
 
+#firebase
+firebaseConfig.ts
+
 # Expo
 .expo/
 dist/
