@@ -48,11 +48,17 @@ export default function ProfileScreen() {
   const MenuButton = ({
     title,
     onPress,
+    disabled = false,
   }: {
     title: string;
     onPress?: () => void;
+    disabled?: boolean;
   }) => (
-    <TouchableOpacity onPress={onPress} style={styles.menuButton}>
+    <TouchableOpacity
+      onPress={onPress}
+      disabled={disabled}
+      style={[styles.menuButton, disabled && styles.inActiveMenuButton]}
+    >
       <Text style={styles.menuText}>{title}</Text>
     </TouchableOpacity>
   );
@@ -70,10 +76,13 @@ export default function ProfileScreen() {
 
       {/* Menu Buttons */}
       <View style={styles.menuContainer}>
-        <MenuButton title="⚙️ Settings" />
-        <MenuButton title="✏️ Edit Profile" />
-        <MenuButton title="📘 Learn More" />
-        <MenuButton title="📞 Contact Us" />
+        <MenuButton disabled={true} title="⚙️ Settings" />
+        <MenuButton disabled={true} title="✏️ Edit Profile" />
+        <MenuButton
+          onPress={() => router.replace("/profile/tasksettings")}
+          title="🗑️ Task Deletion Settings"
+        />
+        <MenuButton disabled={true} title="📞 Contact Us" />
         <MenuButton
           title="🏠 Dashboard"
           onPress={() => router.replace("/(tabs)")}
@@ -119,9 +128,12 @@ const styles = StyleSheet.create({
     gap: 15,
   },
   menuButton: {
-    backgroundColor: "#f2f2f2",
+    backgroundColor: "#f1f1f1",
     padding: 16,
     borderRadius: 12,
+  },
+  inActiveMenuButton: {
+    opacity: 0.3,
   },
   menuText: {
     fontSize: 16,
